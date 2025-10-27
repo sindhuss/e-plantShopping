@@ -7,52 +7,56 @@ const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
-  // Calculate total amount for all products in the cart
-  const calculateTotalAmount = () => {
-        let total = 0; // 1. Initialize a variable total.
+    // Calculate total amount for all products in the cart
+    const calculateTotalAmount = () => {
+            const total = 0; // 1. Initialize a variable total.
 
-  // 2. Iterate over the cart array using forEach().
-  cart.forEach(item => {
-    // 3. Extract quantity and cost.
-    const { quantity, cost } = item;
+            // 2. Iterate over the cart array using forEach().
+            cart.forEach(item => {
+                // 3. Extract quantity and cost.
+                const { quantity, cost } = item;
 
-    // 4. Convert the cost string to a number and multiply by quantity.
-    const numericCost = parseFloat(cost.substring(1));
-    const itemTotal = quantity * numericCost;
+                // 4. Convert the cost string to a number and multiply by quantity.
+                const numericCost = parseFloat(cost.substring(1));
+                const itemTotal = quantity * numericCost;
 
-    // 5. Add the resulting value to total.
-    total += itemTotal;
-  });
+                // 5. Add the resulting value to total.
+                total += itemTotal;
+            });
 
-  // 6. Return the final total sum.
-  return total;
-  };
+            // 6. Return the final total sum.
+            return total;
+    };
 
-  const handleContinueShopping = (e) => {
-    onContinueShopping(e);
-  };
+    const handleContinueShopping = (e) => {
+        onContinueShopping(e);
+    };
 
-  const handleIncrement = (item) => {
-    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
-  };
+    const handleIncrement = (item) => {
+        dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
+    };
 
-  const handleDecrement = (item) => {
-   dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
-  };
+    const handleDecrement = (item) => {
+    dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    };
 
-  const handleRemove = (item) => {
-    dispatch(removeItem());
-  };
+    const handleRemove = (item) => {
+        dispatch(removeItem());
+    };
 
-  // Calculate total cost based on quantity for an item
-  const calculateTotalCost = (item) => {
-    const { cost } = item.cost;
+    // Calculate total cost based on quantity for an item
+    const calculateTotalCost = (item) => {
+        const { quantity, cost } = item;
 
-    const numericCost = parseFloat(cost.substring(1));
-    const itemTotal = quantity * numericCost;
+        const numericCost = parseFloat(cost.substring(1));
+        const itemTotal = quantity * numericCost;
 
-    return itemTotal;
-  };
+        return itemTotal;
+    };
+
+    const handleCheckoutShopping = (e) => {
+        alert('Functionality to be added for future reference');
+    };
 
   return (
     <div className="cart-container">
